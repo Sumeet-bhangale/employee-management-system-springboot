@@ -6,41 +6,48 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class EmployeeController {
 
-    @Autowired
-    private EmployeeService employeeService;
+	@Autowired
+	private EmployeeService employeeService;
 
+	
+	// Add Employee
+	@PostMapping("/addEmployees")
+	public void addEmployees(@RequestBody Employee employee) {
 
-    // Get all employees
-    @GetMapping("/employees")
-    public List<Employee> getAllEmployees() {
+		employeeService.addEmployee(employee);
+	}
 
-        return employeeService.getAllEmployees();
-    }
+	
+	// Get all Employees
+	@GetMapping("/employees")
+	public List<Employee> getAllEmployees() {
+		return employeeService.getAllEmployees();
+	}
 
-    // Add Employee
-    @PostMapping("/addEmployees")
-    public void addEmployees(@RequestBody Employee employee) {
+	
+	// Find By Id
+	@GetMapping("/employees/{id}")
+	public Optional<Employee> getEmployee(@PathVariable int id) {
+		return employeeService.getEmployee(id);
+	}
 
-        employeeService.addEmployee(employee);
-    }
+	
+	// Update Employee Details
+	@PutMapping("/employees/{id}")
+	public Employee updateEmployee(@PathVariable("id") int id, @RequestBody Employee emp) {
 
-    // Update Employee
-    @PutMapping("/employees/{id}")
-    public Employee updateEmployee(@PathVariable("id") int id, @RequestBody Employee emp) {
+		return employeeService.updateEmployeeById(id, emp);
+	}
 
-        return employeeService.updateEmployeeById(id, emp);
-    }
-
-
-    // Delete Employee
-    @DeleteMapping("/employees/{id}")
-    public String deleteEmployee(@PathVariable("id") int id) {
-        return employeeService.deleteEmployeeByID(id);
-    }
-
-
+	
+	// Delete Employee By Id
+	@DeleteMapping("/employees/{id}")
+	public String deleteEmployee(@PathVariable("id") int id) {
+		return employeeService.deleteEmployeeByID(id);
+	}
 }
