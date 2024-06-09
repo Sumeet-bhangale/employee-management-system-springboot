@@ -1,0 +1,101 @@
+How to Run
+
+Prerequisites
+Java 8 or higher
+Maven
+MySQL
+
+Steps
+
+1. Clone the repository
+git clone https://github.com/Sumeet-bhangale/employee-management-system-springboot.git
+cd employee-management-system-springboot
+
+
+2. Configure MySQL
+Create a MySQL database named employee_db.
+Update the application.properties file with your MySQL username and password:
+
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.url=jdbc:mysql://localhost:3307/employee_db
+spring.datasource.username=root
+spring.datasource.password=root1234
+spring.jpa.show-sql=true
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+
+
+3. Build and Run the Application
+
+mvn clean install
+mvn spring-boot:run
+
+
+4. Access the API
+
+- Add Employee
+
+POST /addEmployees
+{
+        "employee_name": "Mitchell V",
+        "salary": 11000,
+        "department": {
+            "department_id": 1
+      	       }
+}
+
+- Get All Employees
+
+GET /employees
+
+- Get Employee by ID
+
+GET /employees/{id}
+
+- Update Employee
+
+PUT /employees/{id}
+{
+    "employee_name" : "John",
+    "salary" : 10000
+}
+
+
+- Delete Employee
+
+DELETE /employees/{id}
+
+- Add Department
+
+POST /departments
+{
+    "short_name": "MAIN",
+    "department_name": "Maintainence Depatrment"
+}
+
+- Get All Departments
+
+GET /departments
+
+
+- Get Department by ID
+
+GET /departments/{id}
+
+
+- Update Department
+
+PUT /departments/{id}
+{
+     "department_id": 3,
+      "short_name": "HR",
+      "department_name": "Human Resource"
+}
+
+- Delete Department
+
+DELETE /departments/{id}
+
+
+
+
