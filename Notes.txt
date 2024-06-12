@@ -26,7 +26,6 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
 
 
 3. Build and Run the Application
-
 mvn clean install
 mvn spring-boot:run
 
